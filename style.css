@@ -1,3 +1,16 @@
+.separator {
+	border-top: 1px solid gray;
+	margin: 50px 0;
+  }
+
+.separator-1 {
+	border-top: 1px solid gray;
+	padding-bottom: 50px;
+}
+
+.separator-2 {
+	border-top: 1px solid gray;
+}
 
 /* header */
 
@@ -47,7 +60,7 @@ header {
 .logo {
 	max-height: 70px;
 	justify-content: flex-start;
-	margin-left: 50px;
+	margin-left: 100px;
 }
   
 .menu-items {
@@ -344,4 +357,125 @@ a.footer-logo {
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+/* Landing page 1st section*/
+
+.section-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    background-image: url('images/home.jpg');
+    background-size: cover;
+    background-position: center top;
+    text-align: center;
+}
+
+.section-1 h1 {
+    font-size: 3rem;
+    color: white;
+	margin-bottom: 10vh;
+}
+
+.section-1 p {
+    font-size: 2rem;
+    color: white;
+}
+
+.highlight {
+    color: #ffae00;
+    font-size: 4rem;
+}
+
+/* Landing page 2nd section*/
+
+.section-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 32vh;
+    text-align: center;
+    padding: 0 2rem;
+	background-color: #e4f6fb;
+	padding-top: 3vh;
+}
+
+.section-2-title {
+	padding-top: 1rem;
+    margin-bottom: 2rem;
+	font-weight: bolder;
+}
+
+.section-2-text {
+	font-size: 1.2rem;
+    max-width: 80%;
+	margin-bottom: 6rem;
+	line-height: 1.6;
+	text-align: left;
+}
+
+/* Landing page 3rd section*/
+
+.section-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+}
+
+.section-3-graph {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-3-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.section-3-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+	margin-bottom: 5rem;
+	max-width: 80%;
+}
+
+.section-3-description {
+    font-size: 1.2rem;
+    max-width: 80%;
+    line-height: 1.6;
+	margin-bottom: 5rem;
+	text-align: left;
+}
+
+.section-3-graph img {
+    max-width: 100%;
+    height: auto;
+}
+
+.view-more-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 8px 16px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 1rem;
+}
+
+.view-more-btn:hover {
+    background-color: #0056b3;
+    text-decoration: none;
 }
