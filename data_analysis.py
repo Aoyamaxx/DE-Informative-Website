@@ -47,7 +47,7 @@ temp_change = average_temperature_change.loc[average_temperature_change['Year'] 
 plt.annotate(f"1961: {average_temperature_change.loc[average_temperature_change['Year'] == 1961, 'TemperatureChange'].values[0]:.2f}°C\n"
              f"2021: {average_temperature_change.loc[average_temperature_change['Year'] == 2021, 'TemperatureChange'].values[0]:.2f}°C\n"
              f"Change: {temp_change:.2f}°C",
-             xy=(0.95, 0.95), xycoords='axes fraction', fontsize=12, ha='right', va='top')
+             xy=(0.95, 0.95), xycoords='axes fraction', fontsize=12, ha='right', va='top', color='orange')
 
 plt.title('Global Surface Temperature Change (1961-2021, in 224 Countries)')
 plt.xlabel('Year')
@@ -78,10 +78,19 @@ if not os.path.exists('country_graphs'):
     os.makedirs('country_graphs')
 
 # Loop through all unique countries in the dataset
+countries = []
 for country in data_melted['Country'].unique():
 
     # Filter data for the current country
     country_data = data_melted[data_melted['Country'] == country]
+
+    # Calculate the temperature difference for the current country
+    temp_change_country = country_data.loc[country_data['Year'] == 2021, 'TemperatureChange'].values[0] - \
+                          country_data.loc[country_data['Year'] == 1961, 'TemperatureChange'].values[0]
+
+    # Store the temperature values for 1961, 2021, and the change for the current country
+    temp_1961_country = country_data.loc[country_data['Year'] == 1961, 'TemperatureChange'].values[0]
+    temp_2021_country = country_data.loc[country_data['Year'] == 2021, 'TemperatureChange'].values[0]
 
     # Create a separate plot for the current country
     plt.figure(figsize=(12, 6))
@@ -93,10 +102,41 @@ for country in data_melted['Country'].unique():
     plt.xlabel('Year')
     plt.ylabel('Temperature Change')
 
+    # Display the average temperature change in the right upper corner
+    plt.annotate(f"1961: {temp_1961_country:.2f}°C\n"
+                 f"2021: {temp_2021_country:.2f}°C\n"
+                 f"Change: {temp_change_country:.2f}°C",
+                 xy=(0.95, 0.95), xycoords='axes fraction', fontsize=12, ha='right', va='top', color='orange')
+
     # Replace special characters in the country name
     sanitized_country_name = country.replace(",", "").replace(".", "").replace(" ", "_")
 
     # Save the plot as an image in the country_graphs folder
     plt.savefig(f'country_graphs/{sanitized_country_name}_temperature_change.png', dpi=300, bbox_inches='tight')
-
     plt.close()
+    
+    countries.append({"name": country, "image": f'country_graphs/{sanitized_country_name}_temperature_change.png'})
+
+with open("country_graphs.html", "w") as html_file:
+    html_file.write('<html>\n<head>\n<style>\n')
+    html_file.write('.graph-container { display: flex; flex-wrap: wrap; }\n')
+    html_file.write('.graph { flex: 1 0 50%; padding: 5px; box-sizing: border-box; }\n')
+    html_file.write('.graph-row { display: flex; flex-wrap: wrap; }\n')
+    html_file.write('.graph-image { width: 100%; height: auto; }\n')
+    html_file.write('</style>\n</head>\n<body>\n')
+    html_file.write('<div class="graph-container">\n')
+
+    for i, country in enumerate(countries):
+        if i % 2 == 0:
+            html_file.write('<div class="graph-row">\n')
+
+        html_file.write(f'<div class="graph">\n')
+        html_file.write(f'<h3>{country["name"]}</h3>\n')
+        html_file.write(f'<img src="{country["image"]}" alt="Temperature change for {country["name"]}" class="graph-image">\n')
+        html_file.write('</div>\n')
+
+        if i % 2 == 1 or i == len(countries) - 1:
+            html_file.write('</div>\n')
+
+    html_file.write('</div>\n')
+    html_file.write('</body>\n</html>')
