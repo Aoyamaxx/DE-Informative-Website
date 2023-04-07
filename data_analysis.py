@@ -49,7 +49,7 @@ plt.annotate(f"1961: {average_temperature_change.loc[average_temperature_change[
              f"Change: {temp_change:.2f}°C",
              xy=(0.95, 0.95), xycoords='axes fraction', fontsize=12, ha='right', va='top')
 
-plt.title('Surface Temperature Change (1961-2021)')
+plt.title('Global Surface Temperature Change (1961-2021, in 224 Countries)')
 plt.xlabel('Year')
 plt.ylabel('Temperature Change')
 
