@@ -144,7 +144,7 @@ plt.gca().set_xticklabels(new_xtick_labels)
 plt.savefig('average_temperature_change_per_year_barplot.png', dpi=300, bbox_inches='tight')
 
 # Generate codes for country_graph.html
-with open("country_graphs.html", "w") as html_file:
+with open("country_graphs_python_generated.html", "w") as html_file:
     html_file.write('<html>\n<head>\n<style>\n')
     html_file.write('.graph-container { display: flex; flex-wrap: wrap; }\n')
     html_file.write('.graph { flex: 1 0 50%; padding: 5px; box-sizing: border-box; }\n')
@@ -167,5 +167,6 @@ with open("country_graphs.html", "w") as html_file:
 
     html_file.write('</div>\n')
     html_file.write('</body>\n</html>')
-    
+
+# Status indicator
 print("Task finished.")
