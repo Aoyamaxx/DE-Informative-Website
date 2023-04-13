@@ -13,6 +13,9 @@ new_columns = {str(i): str(i) if i < 10 else str(i + 1951) for i in range(df_dat
 # Drop some columns with useless info
 df_data = df_data.drop(df_data.columns[4:10], axis = 1)
 
+# Remove the "World" row
+df_data = df_data[df_data['Country'] != 'World']
+
 # Rename the columns of the dataframe
 df_data = df_data.rename(columns=new_columns)
 
