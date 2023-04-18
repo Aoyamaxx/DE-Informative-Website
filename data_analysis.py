@@ -43,12 +43,12 @@ sns.lineplot(data=data_melted, x='Year', y='TemperatureChange', hue='Country', a
 # Plot the linear regression line for the average temperature change
 sns.regplot(data=average_temperature_change, x='Year', y='TemperatureChange', color='black', label='Global Trend', ci=None, order=1, scatter_kws={'zorder': 2}, line_kws={'zorder': 2})
 
-# Calculate the temperature difference using the nearest available years
+# Calculate the temperature difference
 nearest_1961_index = average_temperature_change[average_temperature_change['Year'] >= 1961]['TemperatureChange'].notna().idxmax()
 nearest_2021_index = average_temperature_change[average_temperature_change['Year'] <= 2021]['TemperatureChange'].notna().idxmin()
 
 temp_change = average_temperature_change.loc[nearest_2021_index, 'TemperatureChange'] - \
-              average_temperature_change.loc[nearest_1961_index, 'TemperatureChange']
+            average_temperature_change.loc[nearest_1961_index, 'TemperatureChange']
 
 # Display the average temperature change in the right upper corner
 plt.annotate(f"1961: {average_temperature_change.loc[average_temperature_change['Year'] == 1961, 'TemperatureChange'].values[0]:.2f}°C\n"
@@ -96,7 +96,7 @@ for country in data_melted['Country'].unique():
     nearest_1961_year_country = country_data.loc[nearest_1961_index_country, 'Year']
     nearest_2021_year_country = country_data.loc[nearest_2021_index_country, 'Year']
 
-    # Store the temperature values for the nearest available years to 1961 and 2021, and the change for the current country
+    # Store the temperature values for the nearest available years to 1961 and 2021
     temp_1961_country = country_data.loc[nearest_1961_index_country, 'TemperatureChange']
     temp_2021_country = country_data.loc[nearest_2021_index_country, 'TemperatureChange']
 
